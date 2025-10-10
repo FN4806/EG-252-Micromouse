@@ -1,7 +1,7 @@
 #include "led_control.h"
 #include <Arduino.h>
 
-Led_Control led(25);
+Led_Control led(LED_BUILTIN);
 
 void setup() {
   Serial.begin(9600);
