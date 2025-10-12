@@ -1,0 +1,9 @@
+HAL = Hardware Abstraction Layer
+
+This module provides a basic interface between the main code written in other modules and the actual hardware itself.
+For example, this module will include various classes for things like the motor and the sensors, and all the code to easily interface with these
+components will be here so when trying to, for example, move the motor in another bit of code it can just call something like moveMotor(0.1) and it
+will move the motor 0.1m, all of the heavy code is handled here like communicating over IIC, setting pin outputs, etc. 
+
+This also means that if we change a specific sensor at any point during the project, we will only need to edit the code here as that's all that interfaces 
+directly with the hardware. 
