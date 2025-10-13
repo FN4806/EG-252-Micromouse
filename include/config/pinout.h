@@ -1,10 +1,14 @@
 #ifndef PINOUT_H
 #define PINOUT_H
 
-class Pinout {
-    public:
-        Pinout();
+namespace Pinout {
+    struct Pins {
+        int examplePin;
+        int nextExample;
         int motorPin;
-};
+    };
+
+    extern Pins pins;
+}
 
 #endif

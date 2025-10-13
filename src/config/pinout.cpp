@@ -5,6 +5,11 @@
 //  or output pins it can be quickly changed here and reflected across
 //  all of our code.
 
-Pinout::Pinout() {
-    motorPin = 25;
+namespace Pinout {
+    Pins pins{
+        // Commas used here since its technically a list of values to initalise a Pins object
+        .examplePin = 25,
+        .nextExample = 14,
+        .motorPin = 3
+    };
 }

@@ -1,16 +1,13 @@
-#include "led_control.h"
-#include"config/pinout.h"
+#include"config/pinout.h" // Pinout::pins
+#include "hal/Motor.h" 
 #include <Arduino.h>
-
-Led_Control led{LED_BUILTIN};
-Pinout pins{};
 
 void setup() {
   Serial.begin(9600);
-  led.setSpeed(500);
+
+  Hal::motor.moveForward(25);
 }
 
 void loop() {
-  led.blinkLED();
   Serial.println("Loop run");
 }
