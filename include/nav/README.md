@@ -1,3 +1,5 @@
+# Navigation Module
+
 This module includes any code related to navigation of the micromouse.
 This includes high-level routines that handle movement logic and path planning. These routines could include:
 - Finding the position of the mouse
