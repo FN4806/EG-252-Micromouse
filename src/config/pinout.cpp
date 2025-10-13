@@ -8,8 +8,8 @@
 namespace Pinout {
     Pins pins{
         // Commas used here since its technically a list of values to initalise a Pins object
-        .examplePin = 25,
-        .nextExample = 14,
-        .motorPin = 3
+        pins.examplePin = 25,
+        pins.nextExample = 14,
+        pins.motorPin = 3
     };
 }
