@@ -1,4 +1,4 @@
-HAL = Hardware Abstraction Layer
+# Hardware Abstraction Layer
 
 This module provides a basic interface between the main code written in other modules and the actual hardware itself.
 For example, this module will include various classes for things like the motor and the sensors, and all the code to easily interface with these
