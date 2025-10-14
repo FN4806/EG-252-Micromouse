@@ -1,11 +1,11 @@
 #ifndef MOTOR_H
 #define MOTOR_H
 
-namespace Hal {
+namespace hal {
     class Motor {
         public:
             Motor();
-            void moveForward(float distance);
+            void MoveForward(float distance);
     };
 
     extern Motor motor;

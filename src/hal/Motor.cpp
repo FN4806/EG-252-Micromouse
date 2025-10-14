@@ -5,12 +5,12 @@
 
 using config::pins;
 
-namespace Hal {
+namespace hal {
     Motor::Motor() {
         pinMode(pins.kMotorPin, OUTPUT);
     }
 
-    void Motor::moveForward(float distance) {
+    void Motor::MoveForward(float distance) {
         digitalWrite(pins.kMotorPin, HIGH);
     }
 }
