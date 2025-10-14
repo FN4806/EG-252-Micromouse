@@ -1,11 +1,11 @@
 #ifndef PINOUT_H
 #define PINOUT_H
 
-namespace Pinout {
+namespace config {
     struct Pins {
-        int examplePin;
-        int nextExample;
-        int motorPin;
+        const int kExamplePin = 25;
+        const int kNextExample = 14;
+        const int kMotorPin = 3;
     };
 
     extern Pins pins;

@@ -3,15 +3,15 @@
 
 #include "config/pinout.h"
 
-using Pinout::pins;
+using config::pins;
 
 namespace Hal {
     Motor::Motor() {
-        pinMode(pins.motorPin, OUTPUT);
+        pinMode(pins.kMotorPin, OUTPUT);
     }
 
     void Motor::moveForward(float distance) {
-        digitalWrite(pins.motorPin, HIGH);
+        digitalWrite(pins.kMotorPin, HIGH);
     }
 }
 
