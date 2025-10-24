@@ -1,4 +1,4 @@
-# Embedded Systems Micromouse Project
+# Embedded Systems Micromouse Project 🐭
 
 <!-- Add the nice fancy labels here -->
 ![Microcontroller](https://img.shields.io/badge/Raspberry_Pi_Pico-A22846?logo=raspberrypi)
