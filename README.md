@@ -1,9 +1,9 @@
 # Embedded Systems Micromouse Project
 
 <!-- Add the nice fancy labels here -->
+![Microcontroller](https://img.shields.io/badge/Raspberry_Pi_Pico-A22846?logo=raspberrypi)
 ![PlatformIO](https://img.shields.io/badge/PlatformIO-F5822A?logo=platformio&logoColor=white)
 ![Language](https://img.shields.io/badge/C++-00599C?logo=cplusplus)
-![Microcontroller](https://img.shields.io/badge/Raspberry_Pi_Pico-A22846?logo=raspberrypi)
 
 ## Overview
 
@@ -14,7 +14,7 @@ This project was completed for Swansea University's Embedded Systems Design modu
 
 All code is written by the following team members and overseen by the project head of programming.
 
-## Project Team
+## Team
 
 > Morgan Amirat (Head of Programming)  
 > Josh Middleton (Head of Web Design)  
