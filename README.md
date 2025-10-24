@@ -1,9 +1,9 @@
 # Embedded Systems Micromouse Project
 
 <!-- Add the nice fancy labels here -->
-![PlatformIO](https://img.shields.io/badge/Environment-PlatformIO-F5822A?logo=platformio&logoColor=white)
-![Language](https://img.shields.io/badge/Language-C++-00599C?logo=cplusplus)
-![Microcontroller](https://img.shields.io/badge/Microcontroller-Raspberry_Pi_Pico-A22846?logo=raspberrypi)
+![PlatformIO](https://img.shields.io/badge/PlatformIO-F5822A?logo=platformio&logoColor=white)
+![Language](https://img.shields.io/badge/C++-00599C?logo=cplusplus)
+![Microcontroller](https://img.shields.io/badge/Raspberry_Pi_Pico-A22846?logo=raspberrypi)
 
 ## Overview
 
