@@ -2,12 +2,12 @@
 #include "hal/Motor.h" 
 #include <Arduino.h>
 
-using Hal::motor;
+using hal::motor;
 
 void setup() {
   Serial.begin(9600);
 
-  motor.moveForward(25);
+  motor.MoveForward(25);
 }
 
 void loop() {

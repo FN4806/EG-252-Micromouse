@@ -5,11 +5,9 @@
 //  or output pins it can be quickly changed here and reflected across
 //  all of our code.
 
-namespace Pinout {
+namespace config {
     Pins pins{
         // Commas used here since its technically a list of values to initalise a Pins object
-        pins.examplePin = 25,
-        pins.nextExample = 14,
-        pins.motorPin = 3
+        
     };
 }
