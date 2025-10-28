@@ -6,6 +6,8 @@ namespace hal {
         public:
             Motor();
             void MoveForward(float distance);
+            void SetRawSpeed(int speed);
+            void SpinLeft();
     };
 
     extern Motor motor;
