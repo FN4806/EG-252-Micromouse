@@ -1,38 +1,38 @@
 #include "hal/Motor.h"
 #include <Arduino.h>
-#include <DRV8835MotorShield.h>
 
 // Motor chip is a DRV8835
 
 #include "config/pinout.h"
 
 using config::pins;
-DRV8835MotorShield motor_driver;
 
 namespace hal {
-    Motor::Motor() {
-        motor_driver = DRV8835MotorShield(
-            config::pins.kMotor1Dir,
-            config::pins.kMotor1PWM, 
-            config::pins.kMotor2Dir, 
-            config::pins.kMotor2PWM
-        );
+    Motor::Motor(int driving_pin, int direction_pin) {
+        Motor::drive_pin = driving_pin;
+        Motor::direction_pin = direction_pin;
+
+        pinMode(driving_pin, OUTPUT); digitalWrite(drive_pin, LOW);
+        pinMode(direction_pin, OUTPUT); digitalWrite(direction_pin, LOW);
     }
 
-    void Motor::MoveForward(float distance) {
-        
+    void Motor::SetDirection(int direction) {
+        if ((driving_direction > 1) or (driving_direction < 0)) {
+            driving_direction = 0;
+        } else {
+            driving_direction = direction;
+        }
     }
 
-    void Motor::SetRawSpeed(int speed) {
-        motor_driver.setM1Speed(speed);
-        motor_driver.setM2Speed(speed);
-    }
-
-    void Motor::SpinLeft() {
-        motor_driver.flipM1(true);
-        motor_driver.flipM2(false);
-        motor_driver.setM1Speed(100);
-        motor_driver.setM2Speed(100);
+    void Motor::SetSpeed(int speed) {
+        if ((speed <= 400) and (speed >= 0)) {
+            current_speed = speed;
+        } else if (speed > 400) {
+            speed = 400;
+        } else if (speed < 0) {
+            SetDirection(!driving_direction);
+            current_speed = -speed;
+        }
     }
 }
 
