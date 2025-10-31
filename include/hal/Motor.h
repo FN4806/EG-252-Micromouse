@@ -2,7 +2,6 @@
 #define MOTOR_H
 
 namespace hal {
-
     class Motor {
         public:
             Motor(int direction_pin, int driving_pin);
@@ -12,11 +11,9 @@ namespace hal {
         private:
             int direction_pin;
             int drive_pin;
-            bool driving_direction = 0;
-            int current_speed = 0;
+            bool driving_direction{0};
+            float current_speed{0};
     };
-
-    extern Motor motor;
 }
 
 #endif
