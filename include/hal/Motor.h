@@ -7,12 +7,15 @@ namespace hal {
             Motor(int direction_pin, int driving_pin);
             void SetDirection(int direction);
             void SetSpeed(int speed);
+            void Brake(void);
+            void Freewheel(void);
+            void StartMotorPWM();
 
         private:
             int direction_pin;
             int drive_pin;
             bool driving_direction{0};
-            float current_speed{0};
+            int current_speed{0};
     };
 }
 
