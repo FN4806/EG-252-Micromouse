@@ -14,13 +14,13 @@ void loop() {
   left_motor.SetSpeed(200);
   right_motor.SetSpeed(200);
 
-  left_motor.SetDirection(1);
-  right_motor.SetDirection(1);
+  left_motor.SetDirection(hal::DrivingDirection::kAnticlockwise);
+  right_motor.SetDirection(hal::DrivingDirection::kAnticlockwise);
 
   delay(1000);
 
-  left_motor.SetDirection(0);
-  right_motor.SetDirection(0);
+  left_motor.SetDirection(hal::DrivingDirection::kClockwise);
+  right_motor.SetDirection(hal::DrivingDirection::kClockwise);
 
   delay(1000);
 }

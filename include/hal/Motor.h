@@ -2,19 +2,25 @@
 #define MOTOR_H
 
 namespace hal {
+    /// @brief Enum used to set the driving direction of motors
+    enum class DrivingDirection {
+        kClockwise,
+        kAnticlockwise
+    };
+    
     class Motor {
         public:
-            Motor(int direction_pin, int driving_pin);
-            void SetDirection(int direction);
+            Motor(int driving_pin, int direction_pin);
+            void SetDirection(DrivingDirection direction);
             void SetSpeed(int speed);
             void Brake(void);
             void Freewheel(void);
-            void StartMotorPWM();
+            void StartMotorPWM(void);
 
         private:
-            int direction_pin;
-            int drive_pin;
-            bool driving_direction{0};
+            int pin_1{0};
+            int pin_2{0};
+            DrivingDirection driving_direction{DrivingDirection::kClockwise};
             int current_speed{0};
     };
 }

@@ -2,6 +2,7 @@
 #define PINOUT_H
 
 namespace config {
+    /// @brief Pre-defined pinouts for the microcontroller
     struct Pins {
         const int kExamplePin = 25;
         const int kNextExample = 14;

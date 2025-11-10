@@ -19,47 +19,57 @@ it has the following operating modes (taken from polulu):
   |_______|_______|___________|___________|_______________________|
 */
 
-namespace hal {
+#define max_speed 512
 
-    // Initialise a motor instance, must specify the driving and direction pins for the motor.
-    Motor::Motor(int driving_pin, int direction_pin) {
+namespace hal {
+    /// @brief Initialise a motor instance
+    /// @param motor_pin_1 One of the motor pins, driven in clockwise direction
+    /// @param motor_pin_2 Other motor pin, driven in anticlockwise direction
+    Motor::Motor(int motor_pin_1, int motor_pin_2) {
         // Set the motor instance's pins
-        Motor::drive_pin = driving_pin;
-        Motor::direction_pin = direction_pin;
+        Motor::pin_1 = motor_pin_1;
+        Motor::pin_2 = motor_pin_2;
 
         // Ensure the correct pinouts and default pin values are set.
-        pinMode(driving_pin, OUTPUT); digitalWrite(drive_pin, 1);
-        pinMode(direction_pin, OUTPUT); digitalWrite(direction_pin, 1);
+        pinMode(pin_1, OUTPUT); digitalWrite(pin_1, 1);
+        pinMode(pin_2, OUTPUT); digitalWrite(pin_2, 1);
     }
 
-    // Set the direction of the motor, direction int must be 0 or 1, for forward and reverse respectively.
-    void Motor::SetDirection(int direction) {
+    /// @brief Set the direction of the motor
+    /// @param direction Set using the DrivingDirection enum, with anticlockwise or clockwise
+    void Motor::SetDirection(DrivingDirection direction) {
         // If the specified direction is 1, set the direction else, set it to 0
         // This way handles any other integer being specified as it will just default to 0 direction 
-        if (direction == 1) {
-            driving_direction = 1;
+        if (direction == DrivingDirection::kClockwise) {
+            driving_direction = DrivingDirection::kAnticlockwise;
         } else {
-            driving_direction = direction;
+            driving_direction = DrivingDirection::kClockwise;
         }
 
         StartMotorPWM();
     }
 
-    // Set the speed of the motor, max speed is 500, using a negative speed will reverse the direction.
+    /// @brief Set the speed of the motor, setting the speed to 0 will put the wheels into freewheel, to stop a motor, the brake function is reccomended, see Motor::Brake()
+    /// @param speed Desired speed of the motor, an integer between 0-512, a negative value will reverse the motor and set to the absolute speed value.
     void Motor::SetSpeed(int speed) {
-        if (speed > 500) {
-            // If the speed is greater than 400, just cap it to max speed
+        if (speed > max_speed) {
+            // If the speed is greater than 512, just cap it to max speed
             current_speed = 255;
         } else if (speed < 0) {
-            // Since the speed is a negative number, reverse the direction of the motor
-            SetDirection(!driving_direction);
 
-            // Recursively call the SetSpeed function with a now positive speed value 
-            // This will ensure that the max speed is still enforced
-            SetSpeed(-speed);
+            // Set the current speed to the absolute value of the speed given (provided it's within the max range)
+            if (speed <= max_speed) current_speed = -speed; else current_speed = max_speed;
+
+            // Since the speed is a negative number, reverse the direction of the motor
+            if (driving_direction == DrivingDirection::kClockwise) {
+                SetDirection(DrivingDirection::kAnticlockwise);
+            } else {
+                SetDirection(DrivingDirection::kClockwise);
+            }
+
         } else {
-            // If it gets to this point, the speed is between 0-400 and can be calculated directly from the max PWM value of 255
-            current_speed = (speed/500)*255;
+            // If it gets to this point, the speed is between 0-512 and can be calculated directly from the max PWM value of 255
+            current_speed = (speed/max_speed)*255;
         }
 
         // If the direction is reversed, then the motor is actuated on the lows of the PWM
@@ -67,25 +77,26 @@ namespace hal {
         StartMotorPWM();
     }
 
-    // Brake the motor
+    /// @brief Sets the motor into brake mode
     void Motor::Brake(void) {
-        analogWrite(Motor::drive_pin, 255);
-        analogWrite(Motor::direction_pin, 255);
+        analogWrite(Motor::pin_1, 255);
+        analogWrite(Motor::pin_2, 255);
     }
 
-    // Disengage motor control, letting the wheel turn freely
+    /// @brief Disengages motor control, letting the wheels turn freely
     void Motor::Freewheel(void) {
-        analogWrite(Motor::drive_pin, 0);
-        analogWrite(Motor::direction_pin, 0);
+        analogWrite(Motor::pin_1, 0);
+        analogWrite(Motor::pin_2, 0);
     }
 
-    void Motor::StartMotorPWM() {
-        if (driving_direction == 1) {
-            analogWrite(Motor::drive_pin, 0);
-            analogWrite(Motor::direction_pin, current_speed);
+    /// @brief Start or change the PWM signal going to the motors
+    void Motor::StartMotorPWM(void) {
+        if (driving_direction == DrivingDirection::kAnticlockwise) {
+            analogWrite(Motor::pin_1, 0);
+            analogWrite(Motor::pin_2, current_speed);
         } else {
-            analogWrite(Motor::drive_pin, current_speed);
-            analogWrite(Motor::direction_pin, 0);
+            analogWrite(Motor::pin_1, current_speed);
+            analogWrite(Motor::pin_2, 0);
         }
     }
 }
