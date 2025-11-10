@@ -21,7 +21,7 @@ namespace hal {
             int pin_1{0};
             int pin_2{0};
             DrivingDirection driving_direction{DrivingDirection::kClockwise};
-            int current_speed{0};
+            float current_speed{0};
     };
 }
 
