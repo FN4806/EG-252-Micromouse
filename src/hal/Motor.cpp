@@ -21,6 +21,8 @@ it has the following operating modes (taken from polulu):
 
 #define max_speed 512
 
+int danny;
+
 namespace hal {
     /// @brief Initialise a motor instance
     /// @param motor_pin_1 One of the motor pins, driven in clockwise direction
@@ -38,11 +40,21 @@ namespace hal {
     /// @brief Set the direction of the motor
     /// @param direction Set using the DrivingDirection enum, with anticlockwise or clockwise
     void Motor::SetDirection(DrivingDirection direction) {
+        Serial.println("Setting Direction");
+
+        
+        Serial.print("motor on pins: ");
+        Serial.print(pin_1);
+        Serial.print(" and ");
+        Serial.println(pin_2);
+
         // If the specified direction is 1, set the direction else, set it to 0
         // This way handles any other integer being specified as it will just default to 0 direction 
         if (direction == DrivingDirection::kClockwise) {
+            Serial.println("Current Driving Direction = Clockwise");
             driving_direction = DrivingDirection::kAnticlockwise;
         } else {
+            Serial.println("Current Driving Direction = Anti-Clockwise");
             driving_direction = DrivingDirection::kClockwise;
         }
 
@@ -52,6 +64,7 @@ namespace hal {
     /// @brief Set the speed of the motor, setting the speed to 0 will put the wheels into freewheel, to stop a motor, the brake function is reccomended, see Motor::Brake()
     /// @param speed Desired speed of the motor, an integer between 0-512, a negative value will reverse the motor and set to the absolute speed value.
     void Motor::SetSpeed(int speed) {
+        Serial.println("Setting Speed");
         if (speed > max_speed) {
             // If the speed is greater than 512, just cap it to max speed
             current_speed = 255;
@@ -79,24 +92,27 @@ namespace hal {
 
     /// @brief Sets the motor into brake mode
     void Motor::Brake(void) {
-        analogWrite(Motor::pin_1, 255);
-        analogWrite(Motor::pin_2, 255);
+        analogWrite(pin_1, 255);
+        analogWrite(pin_2, 255);
     }
 
     /// @brief Disengages motor control, letting the wheels turn freely
     void Motor::Freewheel(void) {
-        analogWrite(Motor::pin_1, 0);
-        analogWrite(Motor::pin_2, 0);
+        analogWrite(pin_1, 0);
+        analogWrite(pin_2, 0);
     }
 
     /// @brief Start or change the PWM signal going to the motors
     void Motor::StartMotorPWM(void) {
+        Serial.println("Trying to start PWM");
         if (driving_direction == DrivingDirection::kAnticlockwise) {
-            analogWrite(Motor::pin_1, 0);
-            analogWrite(Motor::pin_2, current_speed);
+            Serial.println("Attempting to drive in ACW direction");
+            analogWrite(pin_1, 0);
+            analogWrite(pin_2, current_speed);
         } else {
-            analogWrite(Motor::pin_1, current_speed);
-            analogWrite(Motor::pin_2, 0);
+            Serial.println("Attempting to drive in CW direction");
+            analogWrite(pin_1, current_speed);
+            analogWrite(pin_2, 0);
         }
     }
 }

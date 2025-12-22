@@ -2,16 +2,20 @@
 #define PINOUT_H
 
 namespace config {
+
     /// @brief Pre-defined pinouts for the microcontroller
     struct Pins {
-        const int kExamplePin = 25;
-        const int kNextExample = 14;
+        /// @brief Left motor pin, driven in forwards direction
+        const int kLeftMotor1 = 6;
 
-        // Pins for motor driving
-        const int kLeftMotorPWM = 6;
-        const int kLeftMotorDir = 7;
-        const int kRightMotorPWM = 9;
-        const int kRightMotorDir = 8;
+        /// @brief Left motor pin, driven in reverse direction
+        const int kLeftMotor2 = 7;
+
+        /// @brief Right motor pin 1, driven in forwards direction
+        const int kRightMotor1 = 9;
+
+        /// @brief Right motor pin 2, driven in reverse direction
+        const int kRightMotor2 = 8;
     };
 
     extern Pins pins;

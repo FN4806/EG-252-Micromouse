@@ -1,16 +1,21 @@
+#include <Arduino.h>
 #include"config/pinout.h" // Pinout::pins
 #include "hal/Motor.h" 
-#include <Arduino.h>
 
 //using hal::motor;
-hal::Motor left_motor(config::pins.kLeftMotorPWM, config::pins.kLeftMotorDir);
-hal::Motor right_motor(config::pins.kRightMotorPWM, config::pins.kRightMotorDir);
+hal::Motor left_motor(config::pins.kLeftMotor1, config::pins.kLeftMotor2);
+hal::Motor right_motor(config::pins.kRightMotor1, config::pins.kRightMotor2);
+
+void SelectMode() {
+  
+}
 
 void setup() {
   Serial.begin(9600);
 }
 
 void loop() {
+  Serial.println("Hello!");
   left_motor.SetSpeed(200);
   right_motor.SetSpeed(200);
 

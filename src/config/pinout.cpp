@@ -6,8 +6,7 @@
 //  all of our code.
 
 namespace config {
-    Pins pins{
-        // Commas used here since its technically a list of values to initalise a Pins object
-        
+    Pins pins {
+
     };
 }
