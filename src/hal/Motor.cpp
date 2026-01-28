@@ -67,23 +67,21 @@ namespace hal {
         Serial.println("Setting Speed");
         if (speed > max_speed) {
             // If the speed is greater than 512, just cap it to max speed
-            current_speed = 255;
+            current_speed = max_speed;
         } else if (speed < 0) {
 
             // Set the current speed to the absolute value of the speed given (provided it's within the max range)
-            if (speed <= max_speed) current_speed = -speed; else current_speed = max_speed;
+            if (speed >= -max_speed) speed = -speed; else speed = max_speed;
 
             // Since the speed is a negative number, reverse the direction of the motor
             if (driving_direction == DrivingDirection::kClockwise) {
-                SetDirection(DrivingDirection::kAnticlockwise);
+                driving_direction = DrivingDirection::kAnticlockwise;
             } else {
-                SetDirection(DrivingDirection::kClockwise);
+                driving_direction = DrivingDirection::kClockwise;
             }
-
-        } else {
-            // If it gets to this point, the speed is between 0-512 and can be calculated directly from the max PWM value of 255
-            current_speed = (speed/max_speed)*255;
         }
+
+        current_speed = (speed/max_speed)*4095;
 
         // If the direction is reversed, then the motor is actuated on the lows of the PWM
         // signal, so for max speed to still be the largest value, it needs to be flipped
@@ -92,8 +90,8 @@ namespace hal {
 
     /// @brief Sets the motor into brake mode
     void Motor::Brake(void) {
-        analogWrite(pin_1, 255);
-        analogWrite(pin_2, 255);
+        analogWrite(pin_1, 4095);
+        analogWrite(pin_2, 4095);
     }
 
     /// @brief Disengages motor control, letting the wheels turn freely

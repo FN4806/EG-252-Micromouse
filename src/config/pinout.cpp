@@ -6,7 +6,4 @@
 //  all of our code.
 
 namespace config {
-    Pins pins {
-
-    };
 }
